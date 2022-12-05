@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class Movement : MonoBehaviour
+{
+    [SerializeField] float speed = 0.3f;
+    [SerializeField] float jumpForce = 10f;
+    Rigidbody2D rb2d;
+    float xAxis,yAxis;
+    [SerializeField] GameObject feet;
+    [SerializeField] float sphereRadius = 0.2f;
+   
+    [SerializeField]  bool  grounded = true;
+    [SerializeField]  LayerMask ground;
+
+    void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
+    
+    void Update()
+    {
+       xAxis = Input.GetAxis("Horizontal");
+      
+       
+       if(Input.GetKeyDown(KeyCode.W ) && grounded)
+       {   
+           Debug.Log("W key was pressed.");
+            rb2d.velocity = new Vector2(rb2d.velocity.x,speed * +1) * Time.deltaTime;
+            rb2d.AddForce(transform.up * jumpForce, ForceMode2D.Impulse );
+       }
+        if (Physics2D.OverlapCircle(feet.transform.position, sphereRadius ,ground))
+        {
+            grounded = true;
+        }
+        else 
+        {
+            grounded = false;
+        }
+        /* if((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) && !grounded)
+        {
+            rb2d.gravityScale = 8f;
+        }
+        else 
+        {
+            rb2d.gravityScale = 4f;
+        }*/
+   
+    }  
+    void FixedUpdate()
+    {
+        transform.Translate(xAxis * speed , 0 , 0);
+        //rb2d.velocity = new Vector2(xAxis*speed,rb2d.velocity.y);
+    } 
+}

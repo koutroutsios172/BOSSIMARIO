@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour
         //groundCheck
         if (Physics2D.OverlapCircle(feet.transform.position, sphereRadius, ground))
         {
-           grounded = true;
+            grounded = true;
         }
         else
         {
@@ -62,5 +62,5 @@ public class Movement : MonoBehaviour
         transform.Translate(xAxis * speed, 0, 0);
 
     }
+    
 }
-

@@ -6,8 +6,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 
 {
-    //Animations
-    //[SerializeField] Animator anim;
+    Animations
+    [SerializeField] Animator anim;
 
     //For running
     [SerializeField] float speed = 0.3f;
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
 
-        //anim.SetFloat("speed", Mathf.Abs(xAxis * 5f));
+        anim.SetFloat("speed", Mathf.Abs(xAxis * 5f));
         xAxis = Input.GetAxis("Horizontal");
         //jump
         if (Input.GetKeyDown(KeyCode.W))

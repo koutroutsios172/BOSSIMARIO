@@ -8,7 +8,6 @@ public class CoinCounter : MonoBehaviour
     public  static CoinCounter counter;
     public TMP_Text coinText;
     public int currentCoins = 0;
-    public 
     void Awake()
     {  
         counter = this;

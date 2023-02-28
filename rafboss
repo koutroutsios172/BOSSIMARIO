@@ -1,0 +1,37 @@
+using UnityEngine;
+
+public class BossController : MonoBehaviour
+{
+    public Transform player;
+    public float jumpForce = 10f;
+    public float jumpDistance = 5f;
+    public float jumpDelay = 1f;
+
+    private bool isJumping = false;
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        if (!isJumping && player != null)
+        {
+            float distanceToPlayer = Mathf.Abs(player.position.x - transform.position.x);
+
+            if (distanceToPlayer <= jumpDistance)
+            {
+                isJumping = true;
+                Invoke("Jump", jumpDelay);
+            }
+        }
+    }
+
+    void Jump()
+    {
+        rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        isJumping = false;
+    }
+}
